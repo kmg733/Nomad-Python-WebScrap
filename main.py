@@ -1,7 +1,5 @@
-from indeed import extractIndeedJobs, extractIndeedPages
+from indeed import getJobs as getIndeedJobs
 
-lastIndeedPage = extractIndeedPages()
-indeedJobs = extractIndeedJobs(lastIndeedPage)
+indeedJobs = getIndeedJobs()
 
-for i in indeedJobs:
-    print(i)
+print(indeedJobs)
