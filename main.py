@@ -1,5 +1,6 @@
-from indeed import getJobs as getIndeedJobs
+from saramin import getJobs as getSaraminJobs
+from save import saveToFile
 
-indeedJobs = getIndeedJobs()
+saraminJobs = getSaraminJobs()
 
-print(indeedJobs)
+print(saraminJobs)
