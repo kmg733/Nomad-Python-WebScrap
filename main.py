@@ -1,3 +1,4 @@
-from indeed import extractIndeedPages
+from indeed import extractIndeedJobs, extractIndeedPages
 
-maxIndeedPages = extractIndeedPages
+lastIndeedPage = extractIndeedPages()
+indeedJobs = extractIndeedJobs(lastIndeedPage)
