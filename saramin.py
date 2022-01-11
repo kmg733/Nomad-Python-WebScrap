@@ -33,7 +33,6 @@ def extractJob(html):
     jcSpans = jobCondition.find_all("span")
 
     joc = []
-    jocLocation = []
     for jcSpan in jcSpans:
         # 회사주소가 a태그로 묶여있어서 beautifulSoup에서 None으로 인식함
         if jcSpan.string == None:
@@ -41,9 +40,8 @@ def extractJob(html):
             jcSpanAnchors = jcSpan.find_all("a")
             # 사람인 사이트에서 주소를 말할때 a태그로 한번더 묶여있는 경우도 있음
             for jcSpanAnchor in jcSpanAnchors:
-                location += jcSpanAnchor.string + ' '                            
-            jocLocation.append(location.strip())
-            
+                location += jcSpanAnchor.string + ' '                                      
+            location.strip()
         # 나머지 경력, 학력, 계약직 등의 정보
         else:
             joc.append(jcSpan.string)
@@ -61,12 +59,18 @@ def extractJob(html):
     corpName = html.find("strong", {"class": "corp_name"})
     cnAnchor = corpName.find("a")["title"]
 
-    return {'title': ajAnchor, 'location': jocLocation, 'condition': joc, 'sector': jsa, 'company': cnAnchor}
+    return {
+        'title': ajAnchor,
+        'location': location,
+        'condition': joc,
+        'sector': jsa,
+        'company': cnAnchor
+    }
 
 
 def extractJobs(lastPage):
     jobs = []
-    for page in range(lastPage):
+    for page in range(lastPage):    
         print(f"Scrapping page {page}")
         PAGE = page + 1
         result = requests.get(f"{URL_A}{PAGE}{URL_B}")
