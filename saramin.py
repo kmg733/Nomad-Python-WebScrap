@@ -45,7 +45,7 @@ def extractJob(html):
         # 나머지 경력, 학력, 계약직 등의 정보
         else:
             joc.append(jcSpan.string)
-
+    jocResult = " ".join(joc)
     # 채용공고의 내용2(채용 분야)
     jobSector = areaJob.find("div", {"class": "job_sector"})
     jsAnchors = jobSector.find_all("a")
@@ -54,7 +54,7 @@ def extractJob(html):
     jsa = []
     for jsAnchor in jsAnchors:
         jsa.append(jsAnchor.string)
-
+    jsaResult = " ".join(jsa)
     # 채용하는 회사
     corpName = html.find("strong", {"class": "corp_name"})
     cnAnchor = corpName.find("a")["title"]
@@ -62,8 +62,8 @@ def extractJob(html):
     return {
         'title': ajAnchor,
         'location': location,
-        'condition': joc,
-        'sector': jsa,
+        'condition': jocResult,
+        'sector': jsaResult,
         'company': cnAnchor
     }
 
