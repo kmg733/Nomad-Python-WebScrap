@@ -16,9 +16,13 @@ def getLastPage():
     # 페이지들을 리스트에 저장
     # 마지막에 필요없는 문자열값이 들어가므로 빼고 실행
     pages = []
-    for link in links[:-1]:
-        pages.append(int(link.string))
-
+    if len(links) > 1:
+        for link in links[:-1]:
+            pages.append(int(link.string))
+    else:
+        justOne = links[0]['page']
+        print(justOne)
+        pages.append(int(justOne))
     maxPage = pages[-1]
     return maxPage
 
