@@ -1,13 +1,14 @@
-from flask import Flask
+from flask import Flask, render_template, request
 
-app = Flask("webScrapper")
+app = Flask("webScrapper", template_folder='./flask_server/templates')
 
 @app.route("/")
 def home():
-    return "Hello! Welcome to mi casa!"
+    return render_template("home.html")
 
-@app.route("/<username>")
-def contact(username):
-    return f"Hello your name is {username}"
+@app.route("/report")
+def report():
+    word = request.args.get('word')
+    return render_template("report.html", searchingBy=word)
 
 app.run(debug=True)
