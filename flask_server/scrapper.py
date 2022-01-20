@@ -12,15 +12,16 @@ def getLastPage(URL):
     links = pagination.find_all('a')
 
     # 페이지들을 리스트에 저장
-    # 마지막에 필요없는 문자열값이 들어가므로 빼고 실행
-    pages = []
+    pages = [1]
     if len(links) > 1:
+        # 마지막에 필요없는 문자열값이 들어가므로 빼고 실행
         for link in links[:-1]:
             pages.append(int(link.string))
     else:
         justOne = links[0]['page']
         print(justOne)
         pages.append(int(justOne))
+    pages.sort()
     maxPage = pages[-1]
     return maxPage
 
